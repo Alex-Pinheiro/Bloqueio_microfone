@@ -83,6 +83,7 @@ class ForegroundService : Service() {
         recorder.setOutputFile("/dev/null")
         recorder.setAudioEncoder(MediaRecorder.AudioEncoder.DEFAULT)
         recorder.prepare()
+
         try {
             recorder.start()
         } catch (e: IllegalStateException) {
@@ -91,11 +92,11 @@ class ForegroundService : Service() {
             // Ask him to stop audio record in other app.
             // Stay in pause with your streaming because MIC is busy.
 
-            isMicFree = false;
+            isMicFree = false
         }
 
         if (isMicFree) {
-            Log.e("MediaRecorder", "start() successful: MIC is free");
+            Log.e("MediaRecorder", "start() successful: MIC is free")
             // MIC is free.
             // You can resume your streaming.
         }
