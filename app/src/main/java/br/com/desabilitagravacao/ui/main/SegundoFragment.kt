@@ -3,12 +3,12 @@ package br.com.desabilitagravacao.ui.main
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.fragment.app.FragmentManager
 import androidx.navigation.findNavController
 import br.com.desabilitagravacao.ForegroundService
 import br.com.desabilitagravacao.R
@@ -30,11 +30,12 @@ class SegundoFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+
         sharedPreferences = requireContext().getSharedPreferences("preferencias", Context.MODE_PRIVATE)
 
         val button: Button? = view?.findViewById(R.id.button2)
         button?.setOnClickListener {
-            Log.e("MediaRecorder", "Botao ok")
+
             ForegroundService.stopService(requireContext())
             view?.findNavController()?.navigate(R.id.action_segundoFragment_to_mainFragment)
         }
@@ -48,4 +49,5 @@ class SegundoFragment : Fragment() {
             view?.findNavController()?.navigate(R.id.action_segundoFragment_to_mainFragment)
         }
     }
+
 }

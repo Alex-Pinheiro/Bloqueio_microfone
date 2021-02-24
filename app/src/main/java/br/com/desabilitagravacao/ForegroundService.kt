@@ -3,10 +3,6 @@ package br.com.desabilitagravacao
 import android.content.Intent
 import android.os.IBinder
 import android.R
-import android.R.id
-
-import android.R.id.input
-import android.annotation.TargetApi
 import android.app.*
 import android.content.Context
 import android.content.SharedPreferences
@@ -15,7 +11,6 @@ import android.os.Build
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.content.ContextCompat
-import br.com.desabilitagravacao.BuildConfig.VERSION_CODE
 
 
 class ForegroundService : Service() {
@@ -28,11 +23,7 @@ class ForegroundService : Service() {
 
     companion object {
 
-
-
-
         fun startService(context: Context, message: String) {
-            Log.e("MediaRecorder", "startService ok")
             val startIntent = Intent(context, ForegroundService::class.java)
             startIntent.putExtra("inputExtra", message)
             ContextCompat.startForegroundService(context, startIntent)
@@ -40,9 +31,8 @@ class ForegroundService : Service() {
             val sharedPreferences: SharedPreferences = context.getSharedPreferences("preferencias", Context.MODE_PRIVATE)
             val editor: SharedPreferences.Editor = sharedPreferences.edit()
             editor.putBoolean("block", true).apply()
-
-
         }
+
         fun stopService(context: Context) {
             val stopIntent = Intent(context, ForegroundService::class.java)
             context.stopService(stopIntent)
@@ -76,7 +66,6 @@ class ForegroundService : Service() {
 
         val notification: Notification = NotificationCompat.Builder(this, 0.toString())
             .setContentTitle("Bloqueado")
-            //.setContentText("Teste")
             .setSmallIcon(R.drawable.ic_btn_speak_now)
             .setContentIntent(pendingIntent)
             .setChannelId(CHANNEL_ID)
@@ -97,7 +86,6 @@ class ForegroundService : Service() {
         try {
             recorder.start()
         } catch (e: IllegalStateException) {
-            Log.e("MediaRecorder", "start() failed: MIC is busy");
 
             // Show alert dialogs to user.
             // Ask him to stop audio record in other app.
@@ -115,9 +103,6 @@ class ForegroundService : Service() {
         // Do not forget to stop and release MediaRecorder for future usage
 //        recorder.stop()
         //      recorder.release()
-
-
-
 
 
         return START_STICKY
